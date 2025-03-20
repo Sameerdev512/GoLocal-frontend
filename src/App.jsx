@@ -1,12 +1,12 @@
 import './App.css'
-import Router from './router/Router'
 import "bootstrap/dist/css/bootstrap.min.css";
+import AppRouter from './Utility/AppRouter';
 
 function App() {
 
   return (
     <>
-      <Router/>
+      <AppRouter/>
     </>
   );
 }
