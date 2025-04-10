@@ -1,14 +1,31 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AuthContext from '../Utility/AuthContext';
-import { useContext } from 'react';
 
 const Navbar = () => {
-  //taking user role and login status
-  const {role} = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  //taking role from authcontext not persist over reload
+  // const {role} = useContext(AuthContext);
+
+  //taking user role from localstorage to persist over reload 
+  const role = localStorage.getItem("role")
   // console.log(role)
+
+  //handle logout
+  const handleLogout = () => {
+    if(confirm("Would you like to logout"))
+    {
+      localStorage.clear();
+      navigate("/home")
+    }
+  };
+
+
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-dark bg-dark navbar-expand-lg ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/home">
             GoLocal
@@ -29,7 +46,11 @@ const Navbar = () => {
               <>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/home">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/home"
+                    >
                       Home
                     </Link>
                   </li>
@@ -69,9 +90,13 @@ const Navbar = () => {
               <>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="#">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/home"
+                    >
                       Home
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="#">
@@ -83,25 +108,20 @@ const Navbar = () => {
                       Orders
                     </a>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/user/dashboard">
-                      Dashboard
-                    </Link>
-                  </li>
                 </ul>
                 <ul
                   className="navbar-nav me-auto mb-2 mb-lg-0"
                   style={{ marginLeft: "60vw" }}
                 >
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <button className="btn btn-dark" onClick={handleLogout}>
                       Logout
-                    </a>
+                    </button>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="/profile">
                       Profile
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </>
@@ -112,55 +132,66 @@ const Navbar = () => {
               <>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/seller/dashboard">
-                      Home
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/seller/dashboard"
+                    >
+                      Dashboard
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/seller/myShop"
+                    >
                       My Shop
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/seller/manageProducts/addProduct"
+                    >
                       Add Products
-                    </a>
+                    </Link>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a className="nav-link" href="#">
                       Orders
                     </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      Dashboard
-                    </a>
-                  </li>
+                  </li> */}
                 </ul>
                 <ul
                   className="navbar-nav me-auto mb-2 mb-lg-0"
                   style={{ marginLeft: "60vw" }}
                 >
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <button className="btn btn-dark" onClick={handleLogout}>
                       Logout
-                    </a>
+                    </button>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="/profile">
                       Profile
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </>
             )}
 
-            {/* if role is seller */}
+            {/* if role is admin */}
             {role == "ADMIN" && (
               <>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/admin/dashboard">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/admin/dashboard"
+                    >
                       Dashboard
                     </Link>
                   </li>
@@ -179,16 +210,15 @@ const Navbar = () => {
                       Reports
                     </a>
                   </li>
-                  
                 </ul>
                 <ul
                   className="navbar-nav me-auto mb-2 mb-lg-0"
                   style={{ marginLeft: "50vw" }}
                 >
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <button className="btn btn-dark" onClick={handleLogout}>
                       Logout
-                    </a>
+                    </button>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="#">

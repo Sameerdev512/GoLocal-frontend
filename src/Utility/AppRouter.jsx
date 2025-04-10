@@ -8,8 +8,12 @@ import AdminDashboard from "../screens/admin/AdminDashboard";
 import UserDashboard from "../screens/user/UserDashboard";
 import AuthContext, { AuthProvider } from "./AuthContext";
 import Home from "../pages/Home";
-import { useContext } from "react";
 import ShopRegistration from "../shop/shopRegistration";
+import ManageProducts from "../screens/seller/ManageProducts";
+import AddProduct from "../screens/seller/AddProduct";
+import MyShop from "../screens/seller/MyShop";
+import Profile from "../pages/Profile";
+import ViewProduct from "../screens/seller/ViewProduct";
 
 const AppRouter = () => {
   return (
@@ -20,21 +24,41 @@ const AppRouter = () => {
 };
 
 const AuthConsumer = () => {
-  const {role } = useContext(AuthContext); // Now inside AuthProvider
+  // const {role } = useContext(AuthContext); // Now inside AuthProvider
+  const role = localStorage.getItem("role")
   console.log(role);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/user/Dashboard" element={role =="USER" && <UserDashboard />} />
-        <Route path="/user/shopregistration" element={role =="USER" ? <ShopRegistration/> :<Login message="Login Required"/>} />
+        <Route
+          path="/user/dashboard"
+          element={role == "USER" && <UserDashboard />}
+        />
+        <Route
+          path="/user/shopRegistration"
+          element={
+            role ? <ShopRegistration /> : <Login message="Login Required" />
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<SignUp />} />
-        <Route path="/seller/dashboard" element={role=="SELLER" && <SellerDashboard />} />
-        <Route path="/admin/dashboard" element={role=="ADMIN" && <AdminDashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/viewProduct/:productId"
+          element={role == "SELLER" && <ViewProduct />}
+        />
+        <Route path="/seller/dashboard" element={<SellerDashboard />} />
+        <Route path="/seller/manageProducts" element={<ManageProducts />} />
+        <Route
+          path="/seller/manageProducts/addProduct"
+          element={<AddProduct />}
+        />
+        <Route path="/seller/myShop" element={<MyShop />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   );
