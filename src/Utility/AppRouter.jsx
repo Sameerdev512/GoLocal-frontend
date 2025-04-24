@@ -14,6 +14,9 @@ import AddProduct from "../screens/seller/AddProduct";
 import MyShop from "../screens/seller/MyShop";
 import Profile from "../pages/Profile";
 import ViewProduct from "../screens/seller/ViewProduct";
+import ShopView from "../pages/ShopView";
+
+import { Bounce, ToastContainer, toast } from "react-toastify";
 
 const AppRouter = () => {
   return (
@@ -30,8 +33,23 @@ const AuthConsumer = () => {
 
   return (
     <BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
+      
       <Routes>
-        <Route path="/home" element={<Home />} />
+        {/* common routes */}
+        <Route path="/" element={<Home />} />
         <Route
           path="/user/dashboard"
           element={role == "USER" && <UserDashboard />}
@@ -47,6 +65,8 @@ const AuthConsumer = () => {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
+
+        {/* seller routes */}
         <Route
           path="/viewProduct/:productId"
           element={role == "SELLER" && <ViewProduct />}
@@ -58,6 +78,9 @@ const AuthConsumer = () => {
           element={<AddProduct />}
         />
         <Route path="/seller/myShop" element={<MyShop />} />
+        <Route path="/shop/:shopId" element={<ShopView />} />
+
+        {/* admin routes */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>

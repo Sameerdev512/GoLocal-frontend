@@ -1,8 +1,10 @@
 import React from 'react'   
 import { Form, useForm } from 'react-hook-form'
 import Navbar from '../componants/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const ShopRegistration = () => {
+  const navigate = useNavigate();
    const {
      register,
      handleSubmit,
@@ -37,6 +39,7 @@ const ShopRegistration = () => {
         //if user registerd the shop so update the role in the localStorage
         if(result === "Shop registered successfully"){
           localStorage.setItem("role", "SELLER")
+          navigate("/seller/dashboard")
         }
     }
   return (

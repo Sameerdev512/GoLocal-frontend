@@ -91,7 +91,7 @@ const ViewProduct = () => {
 
       if (response.ok) {
         alert("Product deleted successfully!");
-        navigate("/manageProducts");
+        navigate("seller/manageProducts");
       }
     } catch (error) {
       console.error("Delete failed:", error);

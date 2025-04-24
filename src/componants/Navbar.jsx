@@ -17,7 +17,7 @@ const Navbar = () => {
     if(confirm("Would you like to logout"))
     {
       localStorage.clear();
-      navigate("/home")
+      navigate("/")
     }
   };
 
@@ -27,7 +27,7 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg ">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/home">
+          <Link className="navbar-brand" to="/">
             GoLocal
           </Link>
           <button
@@ -49,7 +49,7 @@ const Navbar = () => {
                     <Link
                       className="nav-link active"
                       aria-current="page"
-                      to="/home"
+                      to="/"
                     >
                       Home
                     </Link>
@@ -93,7 +93,7 @@ const Navbar = () => {
                     <Link
                       className="nav-link active"
                       aria-current="page"
-                      to="/home"
+                      to="/"
                     >
                       Home
                     </Link>
@@ -190,7 +190,7 @@ const Navbar = () => {
                     <Link
                       className="nav-link active"
                       aria-current="page"
-                      to="/admin/dashboard"
+                      to="/seller/dashboard"
                     >
                       Dashboard
                     </Link>
@@ -201,7 +201,7 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <a className="nav-link" href="/seller/manageProducts">
                       Manage Shops
                     </a>
                   </li>

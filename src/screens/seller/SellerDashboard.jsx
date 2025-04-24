@@ -49,12 +49,16 @@ const SellerDashboard = () => {
         {/* Dashboard Summary Cards */}
         <Row className="mb-4">
           <Col md={3}>
+          
             <Card className="text-center">
               <Card.Body>
                 <Card.Title>Manage Shop</Card.Title>
+                <Link to="/seller/myShop">
                 <Button variant="primary">Edit Shop</Button>
+                </Link>
               </Card.Body>
             </Card>
+              
           </Col>
           <Col md={3}>
             <Card className="text-center">

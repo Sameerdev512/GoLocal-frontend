@@ -2,8 +2,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form} from "react-bootstrap";
 import Navbar from "../../componants/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+  const navigate= useNavigate();
   const {
     register,
     handleSubmit,
@@ -48,6 +50,7 @@ const AddProduct = () => {
     // Reset form after submission
     if (result.message == "Product added successfully.") {
       // reset();
+      navigate("/seller/manageProducts")
     }
   };
 
@@ -110,6 +113,7 @@ const AddProduct = () => {
             <label>Price ($)</label>
             <Form.Control
               type="number"
+              step="0.01"
               {...register("price", { required: "Price is required", min: 1 })}
             />
             {errors.price && (

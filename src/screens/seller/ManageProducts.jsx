@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import Navbar from "../../componants/Navbar";
 import { Link } from "react-router-dom";
+import '../../assets/scss/manageProducts.scss';
 
 ChartJS.register(
   CategoryScale,
@@ -32,13 +33,10 @@ const initialProducts = [
 
 const ManageProducts = () => {
   const [products, setProducts] = useState(initialProducts);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const handleDelete = (id) => {
-    setProducts(products.filter((product) => product.id !== id));
-  };
-
-  const categories = [...new Set(products.map((product) => product.category))];
-  console.log("category array:",categories);
+  const categories = ["All", ...new Set(products.map((product) => product.category))];
+  console.log("category array:", categories);
 
   const chartData = {
     labels: products.map((product) => product.name),
@@ -50,6 +48,7 @@ const ManageProducts = () => {
       },
     ],
   };
+
   const loadSellerProducts = async () => {
     const response = await fetch(
       `http://localhost:8080/api/seller/findAllProducts`,
@@ -71,62 +70,68 @@ const ManageProducts = () => {
     loadSellerProducts();
   }, []);
 
+  const filteredProducts = selectedCategory === "All" 
+    ? products 
+    : products.filter(product => product.category === selectedCategory);
+
   return (
     <>
       <Navbar />
       <Container className="mt-4">
-        <h2 className="text-center mb-4">Manage Products</h2>
+        <div className="d-flex justify-content-between align-items-center mb-5 ">
+          <h2>Manage Products</h2>
+          <Link to="/seller/manageProducts/addProduct">
+            <Button variant="primary">Add New Product</Button>
+          </Link>
+        </div>
 
-        {categories.map((category) => (
-          <div key={category} className="mb-4">
-            <h4 className="mb-3">{category ? category : "Others"}</h4>
-            <Row>
-              {products
-                .filter((product) => product.category === category)
-                .map((product) => (
-                  <Col md={3} sm={6} xs={12} key={product.id} className="mb-4">
-                    <Card className="shadow-sm">
-                      <Card.Body>
-                        <Card.Img
-                          style={{
-                            width: "270px",
-                            height: "250px",
-                            marginBottom: "30px",
-                            border: "1px solid black",
-                          }}
-                          src={product.imageUrl}
-                        ></Card.Img>
-                        <Card.Title>{product.name}</Card.Title>
-                        <Card.Text>Price: ₹{product.price}</Card.Text>
-                        <Card.Text>
-                          Description: {product.description}
-                        </Card.Text>
-                        <Card.Text>Stock: {product.stock}</Card.Text>
-                        <Card.Text>Status: {product.status}</Card.Text>
-                        <Link to={`/viewProduct/${product.id}`}>
-                        <Button
-                          style={{ marginRight: "10px" }}
-                          variant="secondary"
-                          size="sm"
-                          // onClick={() => handleDelete(product.id)}
-                        >
-                            View
-                        </Button>
-                          </Link>
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          onClick={() => handleDelete(product.id)}
-                        >
-                          Delete
-                        </Button>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                ))}
-            </Row>
-          </div>
-        ))}
+        {/* Category Filter Bar */}
+        <div className="category-filter mb-4 my-5">
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={selectedCategory === category ? "success" : "outline-secondary"}
+              className="category-btn me-2"
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category ? category : "null"}
+            </Button>
+          ))}
+        </div>
+
+        <div className="products-grid">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="mb-4">
+              <Card className="product-card h-100">
+                <Card.Body>
+                  <Card.Img
+                    style={{
+                      width: "270px",
+                      height: "250px",
+                      marginBottom: "30px",
+                      border: "1px solid black",
+                    }}
+                    src={product.imageUrl}
+                  />
+                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Text>Price: ₹{product.price}</Card.Text>
+                  <Card.Text>Description: {product.description}</Card.Text>
+                  <Card.Text>Stock: {product.stock}</Card.Text>
+                  <Card.Text>Status: {product.status}</Card.Text>
+                  <Link to={`/viewProduct/${product.id}`}>
+                    <Button
+                      style={{ marginRight: "10px" }}
+                      variant="secondary"
+                      size="sm"
+                    >
+                      View
+                    </Button>
+                  </Link>
+                </Card.Body>
+              </Card>
+            </div>
+          ))}
+        </div>
 
         <div className="mt-5">
           <h5 className="text-center mb-3">Inventory Overview</h5>
