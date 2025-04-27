@@ -29,6 +29,8 @@ const ShopRegistration = () => {
             city: data.city,
             contact: data.contact,
             shopCategory: data.shopType,
+            description: data.description,
+            gstin: data.gstin,
           }),
         });
 
@@ -75,6 +77,18 @@ const ShopRegistration = () => {
             />
             {errors.ownerName && (
               <small className="text-danger">{errors.ownerName.message}</small>
+            )}
+          </div>
+          {/* Desciption */}
+          <div className="mb-3">
+            <label className="form-label">Shop Description</label>
+            <input
+              type="text"
+              className="form-control"
+              {...register("description", { required: "Description is required" })}
+            />
+            {errors.ownerName && (
+              <small className="text-danger">{errors.description.message}</small>
             )}
           </div>
 

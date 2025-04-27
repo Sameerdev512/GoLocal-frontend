@@ -17,6 +17,7 @@ import ViewProduct from "../screens/seller/ViewProduct";
 import ShopView from "../pages/ShopView";
 
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import ProductView from "../pages/ProductView";
 
 const AppRouter = () => {
   return (
@@ -65,6 +66,7 @@ const AuthConsumer = () => {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/shop/:shopId/product/:productId" element={<ProductView />} />
 
         {/* seller routes */}
         <Route
