@@ -1,78 +1,174 @@
-import React from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import Navbar from "../componants/Navbar";
 import { Link } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
+import '../assets/scss/home.scss';
+import { FaFilter } from 'react-icons/fa';
+// import defaultShopImage from '../assets/images/default-shop.png';
 
 const Home = () => {
-  const shops = [
-    {
-      id: 1,
-      name: "ABC Fashion Store",
-      category: "Clothing",
-      image:
-        "https://plus.unsplash.com/premium_photo-1664202525979-80d1da46b34b?w=5000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGglMjBzaG9wfGVufDB8fDB8fHww",
-    },
-    {
-      id: 2,
-      name: "Tech Hub",
-      category: "Electronics",
-      image:
-        "https://media.istockphoto.com/id/877238796/photo/modern-male-customer-choosing-laptop-in-the-computer-shop.jpg?s=1024x1024&w=is&k=20&c=b7Udt4GbW00ubCsCOnCf3p9ggQ9EozEBLBlYHv9sZfg=",
-    },
-    {
-      id: 3,
-      name: "Fresh Mart",
-      category: "Grocery",
-      image:
-        "https://th.bing.com/th/id/OIP.DXpaUZSzQRS1nOU4bvSktQHaE7?w=240&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7 ",
-    },
-  ];
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [allShops, setAllShops] = useState([]);
+
+  // Get nearby shops based on city from the shop's address
+  const nearbyShops = allShops.filter((shop) =>
+    ["indore"].some((city) =>
+      shop.city?.toLowerCase().includes(city.toLowerCase())
+    )
+  );
+
+  // Get unique categories from actual shop data
+  const categories = ["All", ...new Set(allShops.map((shop) => shop.shopCategory))];
+
+  const filterShops = (shops) =>
+    shops
+      .filter(
+        (shop) =>
+          selectedCategory === "All" || shop.shopCategory === selectedCategory
+      )
+      .filter(
+        (shop) =>
+          shop.shopName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          shop.address?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          shop.city?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          shop.state?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+  const loadShops = async() => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/user/getAllShops`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+         
+        },
+      });
+
+      const result = await response.json();
+      console.log("Shops loaded:", result); // Check the data structure
+      setAllShops(result);
+    } catch(error) {
+      console.error("Error fetching shop details:", error);
+      toast.error("Failed to load shops", {
+        position: "top-right",
+        autoClose: 3000,
+        transition: Bounce,
+      });
+    }
+  };
+
+  const getDefaultImage = () => {
+    // Using a data URI as fallback to avoid network requests
+    return "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiM5OTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZSBBdmFpbGFibGU8L3RleHQ+PC9zdmc+";
+  };
+
+  const renderShopCard = (shop) => (
+    <Col key={shop.id} md={4} className="mb-4">
+      <Card className="shop-card h-100">
+        <Card.Img 
+          variant="top" 
+          src={shop.image || getDefaultImage()}
+          alt={shop.shopName}
+          onError={(e) => {
+            e.target.src = getDefaultImage();
+          }}
+          style={{ height: '200px', objectFit: 'cover' }}
+        />
+        <Card.Body>
+          <Card.Title>{shop.shopName}</Card.Title>
+          <div className="shop-details">
+           <p>{shop.description}</p>
+            <p><strong>Location:</strong>  {shop.city}, {shop.state}</p>
+          </div>
+          <Link to={`/shop/${shop.id}`}>
+            <Button variant="primary" className="mt-3 w-100">
+              Visit Shop
+            </Button>
+          </Link>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
+
+  useEffect(() => {
+    loadShops();
+  }, []); 
 
   return (
     <div>
-      {/* Navbar */}
-      <Navbar/>
+      <Navbar />
+
       {/* Hero Section */}
       <section
         className="hero-section text-center text-white d-flex align-items-center justify-content-center"
         style={{
-          background: `url('https://source.unsplash.com/1600x600/?shopping,market') center/cover`,
+          background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/1600x600/?shopping,market') center/cover`,
           height: "60vh",
         }}
       >
-        <div className="hero-overlay p-5 bg-dark bg-opacity-50 rounded">
+        <div className="hero-overlay p-5 rounded">
           <h1>Find & Shop Local Businesses Near You</h1>
           <p className="lead">
             Support local retailers by shopping online or visiting their stores.
           </p>
-          <input
-            type="text"
-            className="form-control w-50 mx-auto my-3"
-            placeholder="Search for shops or products..."
-          />
-          <Button variant="primary" className="me-2">
-            Explore Shops
-          </Button>
-          <Link to="/user/shopregistration"><Button variant="success">Register Your Shop</Button></Link>
+          <div className="search-container w-75 mx-auto">
+            <Form.Control
+              type="text"
+              className="form-control-lg"
+              placeholder="Search shops by name, category, or location..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <div className="mt-4">
+            <Link to="/user/shopregistration">
+              <Button variant="success" size="lg">
+                Register Your Shop
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Shops Section */}
-      <Container className="my-5">
-        <h2 className="text-center mb-4">Featured Shops</h2>
-        <Row>
-          {shops.map((shop) => (
-            <Col key={shop.id} md={4} className="mb-4">
-              <Card className="shop-card">
-                <Card.Img variant="top" src={shop.image} alt={shop.name} />
-                <Card.Body>
-                  <Card.Title>{shop.name}</Card.Title>
-                  <Card.Text>Category: {shop.category}</Card.Text>
-                  <Button variant="primary">View Shop</Button>
-                </Card.Body>
-              </Card>
-            </Col>
+      {/* Category Filter */}
+      <Container className="mt-5">
+        <div className="filter-header">
+          <div className="filter-icon">
+            <FaFilter />
+          </div>
+          <h3>Filter Options</h3>
+        </div>
+        <div className="category-filter mb-4 text-center">
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={selectedCategory === category ? "primary" : "outline-primary"}
+              className="me-2 mb-2"
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </Button>
           ))}
+        </div>
+      </Container>
+
+      {/* Nearby Shops */}
+      {localStorage.getItem("role")&&
+      <Container className="my-4">
+        <h2 className="text-center mb-4">🧭 Shops Near You</h2>
+        <Row>
+          {filterShops(nearbyShops).map(renderShopCard)}
+        </Row>
+      </Container>
+}
+
+      {/* All Shops */}
+      <Container className="my-4">
+        <h2 className="text-center mb-4">🏪 All Shops</h2>
+        <Row>
+          {filterShops(allShops).map(renderShopCard)}
         </Row>
       </Container>
     </div>

@@ -1,0 +1,178 @@
+@media (max-width: 768px) {
+  .product-view-container .back-button {
+    font-size: 0.9rem;
+  }
+}
+.product-view-container .main-content {
+  margin-bottom: 2rem;
+}
+.product-view-container .product-image-container {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+.product-view-container .product-image-container .carousel .carousel-control-prev,
+.product-view-container .product-image-container .carousel .carousel-control-next {
+  width: 10%;
+  opacity: 0.7;
+}
+.product-view-container .product-image-container .carousel .carousel-control-prev:hover,
+.product-view-container .product-image-container .carousel .carousel-control-next:hover {
+  opacity: 1;
+}
+.product-view-container .product-image-container .carousel .carousel-indicators {
+  margin-bottom: 0;
+}
+.product-view-container .product-image-container .main-image {
+  width: 100%;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+}
+@media (max-width: 768px) {
+  .product-view-container .product-image-container .main-image {
+    height: 300px;
+  }
+}
+.product-view-container .product-details {
+  margin-left: 1rem;
+}
+.product-view-container .product-details h1 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+@media (max-width: 768px) {
+  .product-view-container .product-details h1 {
+    font-size: 1.5rem;
+  }
+}
+.product-view-container .product-details .price {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0d6efd;
+  margin-bottom: 15px;
+}
+@media (max-width: 768px) {
+  .product-view-container .product-details .price {
+    font-size: 1.8rem;
+  }
+}
+.product-view-container .product-details .stock-status {
+  margin-bottom: 15px;
+}
+.product-view-container .product-details .stock-status span {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.product-view-container .product-details .stock-status span.in-stock {
+  background: rgba(25, 135, 84, 0.1);
+  color: #198754;
+}
+.product-view-container .product-details .stock-status span.out-of-stock {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+.product-view-container .product-details .description {
+  margin-bottom: 15px;
+}
+.product-view-container .product-details .description h4 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+.product-view-container .product-details .description p {
+  color: #6c757d;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+.product-view-container .product-details .specifications h4 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 12px;
+}
+.product-view-container .product-details .specifications ul {
+  list-style: none;
+  padding: 0;
+}
+.product-view-container .product-details .specifications ul li {
+  margin-bottom: 8px;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+.product-view-container .product-details .specifications ul li strong {
+  color: #333;
+  margin-right: 8px;
+}
+.product-view-container .product-details .actions .btn {
+  padding: 12px;
+  font-size: 1rem;
+}
+.product-view-container .product-details .actions .btn i {
+  margin-right: 8px;
+}
+.product-view-container .related-products h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+.product-view-container .related-products .related-product-card {
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.product-view-container .related-products .related-product-card:hover {
+  transform: translateY(-5px);
+}
+.product-view-container .related-products .related-product-card img {
+  width: 100%;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.product-view-container .related-products .related-product-card .product-info {
+  padding: 15px;
+  background: white;
+}
+.product-view-container .related-products .related-product-card .product-info h5 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+.product-view-container .related-products .related-product-card .product-info .price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0d6efd;
+  margin: 0;
+}
+
+.modal .modal-title {
+  font-size: 1.3rem;
+  color: #333;
+}
+.modal .form-label {
+  font-size: 0.95rem;
+  color: #333;
+}
+.modal .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+@media (max-width: 768px) {
+  .product-view-container .main-content {
+    margin-bottom: 1.5rem;
+  }
+  .product-view-container .product-details {
+    padding-top: 1.5rem;
+  }
+  .product-view-container .related-products h3 {
+    font-size: 1.3rem;
+  }
+}/*# sourceMappingURL=productview.css.map */

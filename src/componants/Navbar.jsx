@@ -1,16 +1,28 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import AuthContext from '../Utility/AuthContext';
-import { useContext } from 'react';
+import '../assets/scss/navbar.scss';
 
 const Navbar = () => {
-  //taking user role and login status
-  const {role} = useContext(AuthContext);
-  // console.log(role)
+  const navigate = useNavigate();
+  const location = useLocation();
+  const role = localStorage.getItem("role");
+
+  const isActive = (path) => {
+    return location.pathname === path ? "nav-link active" : "nav-link";
+  };
+
+  const handleLogout = () => {
+    if(confirm("Would you like to logout")) {
+      localStorage.clear();
+      navigate("/")
+    }
+  };
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/home">
+          <Link className="navbar-brand" to="/">
             GoLocal
           </Link>
           <button
@@ -29,17 +41,17 @@ const Navbar = () => {
               <>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/home">
+                    <Link className={isActive("/")} to="/">
                       Home
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/about">
+                    <Link className={isActive("/about")} to="/about">
                       About Us
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/contactus">
+                    <Link className={isActive("/contactus")} to="/contactus">
                       Contact Us
                     </Link>
                   </li>
@@ -48,19 +60,8 @@ const Navbar = () => {
                   Login
                 </Link>
                 <Link to="/auth/register" style={{ marginRight: "20px" }}>
-                  Register
+                  <span>Register</span>
                 </Link>
-                <form className="d-flex" role="search">
-                  <input
-                    className="form-control me-2"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                  />
-                  <button className="btn btn-outline-success" type="submit">
-                    Search
-                  </button>
-                </form>
               </>
             )}
 
@@ -69,39 +70,31 @@ const Navbar = () => {
               <>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="#">
+                    <Link className={isActive("/")} to="/">
                       Home
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className={isActive("/browse-shops")} to="/browse-shops">
                       Browse Shops
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className={isActive("/orders")} to="/orders">
                       Orders
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/user/dashboard">
-                      Dashboard
                     </Link>
                   </li>
                 </ul>
-                <ul
-                  className="navbar-nav me-auto mb-2 mb-lg-0"
-                  style={{ marginLeft: "60vw" }}
-                >
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ marginLeft: "60vw" }}>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <button className="btn btn-dark" onClick={handleLogout}>
                       Logout
-                    </a>
+                    </button>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className={isActive("/profile")} to="/profile">
                       Profile
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </>
@@ -112,88 +105,76 @@ const Navbar = () => {
               <>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/seller/dashboard">
-                      Home
+                    <Link className={isActive("/seller/dashboard")} to="/seller/dashboard">
+                      Dashboard
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className={isActive("/seller/myShop")} to="/seller/myShop">
                       My Shop
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      Add Products
-                    </a>
+                    <Link className={isActive("/about")} to="/about">
+                      About Us
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      Orders
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      Dashboard
-                    </a>
-                  </li>
+                    <Link className={isActive("/contactus")} to="/contactus">
+                      Contact Us
+                    </Link>
+                    </li>
                 </ul>
-                <ul
-                  className="navbar-nav me-auto mb-2 mb-lg-0"
-                  style={{ marginLeft: "60vw" }}
-                >
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ marginLeft: "60vw" }}>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <button className="btn btn-dark" onClick={handleLogout}>
                       Logout
-                    </a>
+                    </button>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className={isActive("/profile")} to="/profile">
                       Profile
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </>
             )}
 
-            {/* if role is seller */}
+            {/* if role is admin */}
             {role == "ADMIN" && (
               <>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/admin/dashboard">
+                    <Link className={isActive("/admin/dashboard")} to="/admin/dashboard">
                       Dashboard
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className={isActive("/admin/manage-users")} to="/admin/manage-users">
                       Manage Users
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className={isActive("/admin/manage-shops")} to="/admin/manage-shops">
                       Manage Shops
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className={isActive("/admin/reports")} to="/admin/reports">
                       Reports
-                    </a>
+                    </Link>
                   </li>
-                  
                 </ul>
-                <ul
-                  className="navbar-nav me-auto mb-2 mb-lg-0"
-                  style={{ marginLeft: "50vw" }}
-                >
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ marginLeft: "50vw" }}>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <button className="btn btn-dark" onClick={handleLogout}>
                       Logout
-                    </a>
+                    </button>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className={isActive("/profile")} to="/profile">
                       Profile
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </>

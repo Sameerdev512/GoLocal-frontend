@@ -1,0 +1,359 @@
+// Variables
+$primary-color: #2563eb;
+$secondary-color: #1e40af;
+$accent-color: #3b82f6;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background-light: #f3f4f6;
+$white: #ffffff;
+$shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+// Hero Section
+.hero-section {
+  position: relative;
+  height: 75vh !important;
+  background-attachment: fixed;
+  
+  .hero-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    max-width: 900px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(45deg, $white, #e2e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .lead {
+      font-size: 1.35rem;
+      margin-bottom: 2.5rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      opacity: 0.9;
+    }
+
+    .search-container {
+      .form-control-lg {
+        padding: 1.2rem 1.8rem;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 100px;
+        box-shadow: $shadow-md;
+        transition: all 0.3s ease;
+        
+        &:focus {
+          box-shadow: 0 0 0 4px rgba($primary-color, 0.2);
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    .btn-success {
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 100px;
+      background: linear-gradient(45deg, #22c55e, #16a34a);
+      border: none;
+      box-shadow: $shadow-sm;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-md;
+      }
+    }
+  }
+}
+
+// Filter Section
+.filter-section {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba($white, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(#000, 0.05);
+
+  .filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+
+    .filter-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 200px;
+
+      .filter-icon {
+        color: $primary-color;
+        font-size: 1.3rem;
+        background: rgba($primary-color, 0.1);
+        padding: 0.5rem;
+        border-radius: 8px;
+      }
+
+      h3 {
+        margin: 0;
+        color: $text-dark;
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+    }
+
+    .category-filter {
+      flex-grow: 1;
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.5rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .btn {
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        
+        &.active {
+          background: $primary-color;
+          color: $white;
+          border: none;
+          box-shadow: 0 2px 8px rgba($primary-color, 0.3);
+          transform: translateY(-1px);
+
+          &:hover {
+            background: darken($primary-color, 5%);
+          }
+        }
+        
+        &:not(.active) {
+          background: $white;
+          color: $text-dark;
+          border: 1px solid #e5e7eb;
+          
+          &:hover {
+            background: $background-light;
+            transform: translateY(-1px);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Shop Cards Grid
+.shops-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+// Shop Cards
+.shop-card {
+  height: 360px; // Increased from 320px
+  transition: all 0.4s ease;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  background: $white;
+  box-shadow: $shadow-sm;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-md;
+  }
+
+  .card-img-top {
+    height: 240px; // Increased from 160px
+    object-fit: cover;
+    transition: all 0.4s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .card-body {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: $text-dark;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-text {
+      color: $text-light;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; // Ensures exactly 2 lines
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 2.8em; // Force height for 2 lines (1.5 line-height * 2 lines = 3em, minus a bit for safety)
+    }
+
+    .location {
+      font-size: 0.85rem;
+      color: $text-light;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+
+      i {
+        color: $primary-color;
+      }
+    }
+
+    .btn {
+      padding: 0.6rem 1rem;
+      font-weight: 500;
+      border-radius: 8px;
+      background: $primary-color;
+      border: none;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      width: 100%;
+      margin-top: auto; // Pushes button to bottom
+
+      &:hover {
+        background: darken($primary-color, 5%);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// Section Headers
+.section-header {
+  text-align: left;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0;
+    
+    .emoji {
+      font-size: 2rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .section-divider {
+    flex-grow: 1;
+    height: 2px;
+    background: linear-gradient(to right, rgba($primary-color, 0.2), transparent);
+  }
+}
+
+// Responsive Adjustments
+@media (max-width: 768px) {
+  .hero-section {
+    height: 70vh !important;
+    
+    .hero-overlay {
+      width: 95%;
+      padding: 2rem !important;
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .lead {
+        font-size: 1.1rem;
+      }
+      
+      .search-container {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .filter-section {
+    .filter-container {
+      flex-direction: column;
+      gap: 1rem;
+
+      .filter-header {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .category-filter {
+        justify-content: flex-start;
+        padding: 0.5rem 0;
+      }
+    }
+  }
+
+  .shops-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .section-header {
+    h2 {
+      font-size: 1.5rem;
+      
+      .emoji {
+        font-size: 1.7rem;
+      }
+    }
+  }
+
+  .shop-card {
+    height: 340px; // Slightly smaller on mobile
+    
+    .card-img-top {
+      height: 160px; // Slightly smaller on mobile
+    }
+    
+    .card-body {
+      padding: 1rem;
+      
+      .card-title {
+        font-size: 1rem;
+      }
+      
+      .card-text {
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+

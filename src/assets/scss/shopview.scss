@@ -1,0 +1,172 @@
+.shop-view {
+  .shop-header {
+    background-size: cover;
+    background-position: center;
+    padding: 60px 0;
+    color: white;
+    margin-bottom: 40px;
+
+    h1 {
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .shop-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 0.95rem;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        i {
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    .contact-btn {
+      padding: 10px 20px;
+      border-radius: 25px;
+      
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .shop-content {
+    padding-bottom: 50px;
+
+    .shop-info-card {
+      position: sticky;
+      top: 20px;
+      border: none;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+
+      .info-item {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+
+        i {
+          font-size: 1.2rem;
+          color: #0d6efd;
+        }
+
+        strong {
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        p {
+          margin: 0;
+          color: #6c757d;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .category-filter {
+      margin-bottom: 30px;
+
+      .btn {
+        border-radius: 20px;
+        padding: 8px 20px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    .product-card {
+      border: none;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+
+      .product-image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .out-of-stock {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          background: rgba(220, 53, 69, 0.9);
+          color: white;
+          padding: 5px 10px;
+          border-radius: 15px;
+          font-size: 0.8rem;
+        }
+      }
+
+      .card-body {
+        padding: 1.25rem;
+
+        .card-title {
+          font-size: 1.1rem;
+          margin-bottom: 10px;
+        }
+
+        .price {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #0d6efd;
+          margin-bottom: 10px;
+        }
+
+        .description {
+          font-size: 0.9rem;
+          color: #6c757d;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .shop-view {
+    .shop-header {
+      padding: 30px 0;
+      text-align: center;
+
+      .shop-meta {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .contact-btn {
+        margin-top: 20px;
+      }
+    }
+
+    .shop-content {
+      .shop-info-card {
+        margin-bottom: 30px;
+        position: static;
+      }
+    }
+  }
+}

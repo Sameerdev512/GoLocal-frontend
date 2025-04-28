@@ -1,0 +1,228 @@
+.about-page {
+  .about-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    text-align: center;
+    color: white;
+    margin-bottom: 60px;
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+
+  .mission-content {
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .lead {
+      font-size: 1.25rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      color: #777;
+      line-height: 1.8;
+    }
+  }
+
+  .mission-image {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .stats-section {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+    text-align: center;
+
+    .stat-item {
+      margin-bottom: 30px;
+
+      .stat-icon {
+        font-size: 2.5rem;
+        color: #0d6efd;
+        margin-bottom: 15px;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        font-size: 1.1rem;
+        color: #666;
+      }
+    }
+  }
+
+  .value-card {
+    text-align: center;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.6;
+    }
+  }
+
+  .team-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .team-image-wrapper {
+      height: 250px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .card-body {
+      padding: 20px;
+      text-align: center;
+
+      .card-title {
+        font-size: 1.25rem;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .card-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+
+      .card-text {
+        color: #666;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .join-section {
+    background: linear-gradient(rgba(13, 110, 253, 0.9), rgba(13, 110, 253, 0.9)),
+                url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    padding: 80px 0;
+    text-align: center;
+    color: white;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      .btn {
+        margin: 0 10px;
+        padding: 12px 30px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        
+        &:hover {
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+// Responsive Adjustments
+@media (max-width: 768px) {
+  .about-page {
+    .about-hero {
+      padding: 60px 0;
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
+
+    .mission-content {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .stats-section {
+      padding: 40px 0;
+    }
+
+    .join-section {
+      padding: 40px 0;
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .cta-buttons {
+        .btn {
+          display: block;
+          margin: 10px auto;
+          width: 80%;
+        }
+      }
+    }
+  }
+}

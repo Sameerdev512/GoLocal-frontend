@@ -1,128 +1,211 @@
 import { useContext } from "react";
-import Navbar from "../componants/Navbar";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "../Utility/AuthContext";
+import Navbar from "../componants/Navbar";
+import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
+import { FaEnvelope, FaLock, FaGoogle, FaFacebook } from 'react-icons/fa';
+import '../assets/scss/auth.scss';
 
-const Login = ({message}) => {
+const Login = ({ message }) => {
+  const { setRole, setLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
-  if(message)
-  {
-    alert(message)
-  }
-  const {setRole,setLogin} = useContext(AuthContext);
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch("http://localhost:8080/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: data.email,
+          password: data.password,
+        }),
+      });
 
-    const navigate = useNavigate();
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+      if (!response.ok) {
+        throw new Error("Invalid credentials");
+      }
 
-    const onSubmit = async (data) => {
-      console.log(data)
-        try {
-          const response = await fetch("http://localhost:8080/auth/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              username: data.email,
-              password: data.password,
-            }),
-          });
+      const result = await response.json();
+      
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("role", result.role);
+      
+      setRole(result.role);
+      setLogin(true);
 
-          if (!response.ok) {
-            throw new Error("Bad Credentials");
-          }
+      switch (result.role) {
+        case "USER":
+          navigate("/");
+          break;
+        case "ADMIN":
+          navigate("/admin/dashboard");
+          break;
+        case "SELLER":
+          navigate("/");
+          break;
+      }
 
-          //parsing token and user role
-          const result = await response.json();
-          console.log(result);
+    } catch (e) {
+      alert(e.message);
+      console.log(e.message);
+    }
+  };
 
-          //setting generated token and role of user in localStorage
-          localStorage.setItem("token", result.token);
-          localStorage.setItem("role", result.role);
+  return (
+    <>
+      <Navbar />
+      <div className="auth-page">
+        <Container fluid>
+          <Row className="vh-100">
+            {/* Left Side - Login Form */}
+            <Col
+              md={6}
+              className="auth-form-side d-flex align-items-center justify-content-center"
+            >
+              <Card className="auth-card border-0">
+                <Card.Body className="p-5 left-card">
+                  <div className="text-center mb-4">
+                    <h2 className="fw-bold">Welcome Back!</h2>
+                    <p className="text-muted">Please login to your account</p>
+                  </div>
 
-          //enable when project isready
-          //save role and login status in Auth conetext to save state
-          setRole(result.role)
-          setLogin(true)
+                  {message && (
+                    <Alert variant="info" className="mb-4">
+                      {message}
+                    </Alert>
+                  )}
 
-          //role based home(dashboard) page navigation
-          switch (result.role) {
-            case "USER":
-              navigate("/home");
-              break;
+                  <Form onSubmit={handleSubmit(onSubmit)}>
+                    <Form.Group className="mb-4">
+                      <div className="input-group">
+                        <span className="input-group-text">
+                          <FaEnvelope />
+                        </span>
+                        <Form.Control
+                          type="email"
+                          className="p-2"
+                          placeholder="Email address"
+                          {...register("email", {
+                            required: "Email is required",
+                            pattern: {
+                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                              message: "Invalid email address",
+                            },
+                          })}
+                        />
+                      </div>
+                      {errors.email && (
+                        <small className="text-danger">
+                          {errors.email.message}
+                        </small>
+                      )}
+                    </Form.Group>
 
-            case "ADMIN":
-              navigate("/admin/dashboard");
-              break;
+                    <Form.Group className="mb-4">
+                      <div className="input-group">
+                        <span className="input-group-text">
+                          <FaLock />
+                        </span>
+                        <Form.Control
+                          type="password"
+                          className="p-2"
+                          placeholder="Password"
+                          {...register("password", {
+                            required: "Password is required",
+                            minLength: {
+                              value: 6,
+                              message: "Password must be at least 6 characters",
+                            },
+                          })}
+                        />
+                      </div>
+                      {errors.password && (
+                        <small className="text-danger">
+                          {errors.password.message}
+                        </small>
+                      )}
+                    </Form.Group>
 
-            case "SELLER":
-              navigate("/home");
-              break;
+                    <div className="d-flex justify-content-between align-items-center mb-4">
+                      <Form.Check type="checkbox" label="Remember me" />
+                      <Link
+                        to="/forgot-password"
+                        className="text-primary text-decoration-none"
+                      >
+                        Forgot Password?
+                      </Link>
+                    </div>
 
-          }
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      className="w-100 mb-4"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Logging in..." : "Login"}
+                    </Button>
 
-          //pop-up message for loginsucsess
-          alert("Login successful");
-        } catch (e) {
-            //Error message - usually Bad Credentials
-            alert(e.message)
-            console.log(e.message);
-        }
-    };
-    return (
-      <div>
-        <Navbar />
-        <center><h2>Login Now</h2></center>
-        <form
-          style={{ width: "50vw", marginLeft: "30vw" }}
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <br />
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              className="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-              {...register("email")}
-            />
-          </div>
-          <br />
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Password"
-              {...register("password"
-              //, {
-              //   required: "Password is required",
-              //   pattern: {
-              //     value:
-              //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{9,20}$/,
-              //       message:"password must contain lowercase,uppercase,number and special character",
-              //   },
-              //   minLength: {
-              //     value: 9,
-              //     message: "Password must be at least 9 characters",
-              //   },
-              // }
-              )}
-            />
-            {errors.password && (
-              <p style={{ color: "red" }}>{errors.password.message}</p>
-            )}
-          </div>
-          <input type="Submit" className="btn btn-primary"></input>
-        </form>
+                    <div className="text-center mb-4">
+                      <p className="text-muted">Or login with</p>
+                      <div className="social-login">
+                        <Button variant="outline-primary" className="me-2">
+                          <FaGoogle /> Google
+                        </Button>
+                        <Button variant="outline-primary" className="p-2">
+                          <FaFacebook /> Facebook
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="text-center">
+                      <p className="mb-0">
+                        Don't have an account?{" "}
+                        <Link
+                          to="/auth/register"
+                          className="text-primary text-decoration-none"
+                        >
+                          Sign Up
+                        </Link>
+                      </p>
+                    </div>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </Col>
+
+            {/* Right Side - Image and Text */}
+            <Col
+              md={6}
+              className="auth-image-side d-none d-md-flex align-items-center justify-content-center text-white"
+            >
+              <div className="text-center p-5">
+                <h1 className="display-4 fw-bold mb-4">GoLocal</h1>
+                <p className="lead mb-4">
+                  Connect with local businesses and discover amazing products in
+                  your neighborhood
+                </p>
+                <img
+                  src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Shopping%20Bags.png"
+                  alt="Login"
+                  className="img-fluid mb-4 auth-illustration"
+                  style={{ maxWidth: "300px" }}
+                />
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
-    );
+    </>
+  );
 };
 
 export default Login;
