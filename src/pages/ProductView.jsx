@@ -145,7 +145,7 @@ const ProductView = () => {
 
               <div className="description">
                 <h4>Description</h4>
-                <p>{product.description}</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod omnis necessitatibus temporibus sint tenetur? Nobis veritatis fugit voluptas aperiam molestias magni sint impedit nesciunt. Adipisci nesciunt numquam quam, corrupti sint voluptate voluptas impedit nulla? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam omnis amet incidunt hic ipsum, asperiores expedita veniam aut possimus nesciunt pariatur magni aliquid modi vero ratione vitae dolorum cupiditate nobis eaque, at eum excepturi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae molestias reprehenderit pariatur omnis? Rem totam eos ullam quibusdam nam consectetur corrupti fuga sunt quisquam illum culpa nostrum asperiores labore, tenetur illo explicabo reprehenderit laborum! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore veritatis reprehenderit assumenda ratione aliquid odio eligendi commodi deserunt, tempore, nulla iste explicabo esse aperiam recusandae neque omnis delectus. Natus maxime animi officia voluptates Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, aspernatur architecto. Deleniti facilis qui quas, minus iusto inventore debitis, dolore provident ea eaque, facere at ut placeat veniam quidem? Neque incidunt nam rerum eius.</p>
               </div>
 
               <div className="specifications mt-4">

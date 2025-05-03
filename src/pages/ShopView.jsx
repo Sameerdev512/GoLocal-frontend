@@ -5,6 +5,7 @@
   import '../assets/scss/shopview.scss';
   import { Link } from 'react-router-dom';
   import { toast, Bounce } from "react-toastify";
+  import { FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaFilter, FaCheckCircle, FaExclamationCircle, FaTimesCircle, FaShoppingCart, FaSearch } from 'react-icons/fa';
 
   const ShopView = () => {
     const { shopId } = useParams();
@@ -127,33 +128,46 @@
                   <Card.Body>
                     <h5>Shop Information</h5>
                     <div className="info-item">
-                      <i className="bi bi-person"></i>
+                      <div className="icon-wrapper">
+                        <FaUser />
+                      </div>
                       <div>
                         <strong>Owner</strong>
                         <p>{shop.ownerName}</p>
                       </div>
                     </div>
                     <div className="info-item">
-                      <i className="bi bi-telephone"></i>
+                      <div className="icon-wrapper">
+                        <FaPhone />
+                      </div>
                       <div>
                         <strong>Contact</strong>
                         <p>{shop.contact}</p>
                       </div>
                     </div>
                     <div className="info-item">
-                      <i className="bi bi-envelope"></i>
+                      <div className="icon-wrapper">
+                        <FaEnvelope />
+                      </div>
                       <div>
                         <strong>Email</strong>
                         <p>{shop.email}</p>
                       </div>
                     </div>
                     <div className="info-item">
-                      <i className="bi bi-geo-alt"></i>
+                      <div className="icon-wrapper">
+                        <FaMapMarkerAlt />
+                      </div>
                       <div>
                         <strong>Address</strong>
                         <p>{shop.address}</p>
                         <p>{shop.city}, {shop.state}</p>
                       </div>
+                    </div>
+                    <div className="social-links">
+                      <a href="#" title="Facebook"><FaFacebook /></a>
+                      <a href="#" title="Twitter"><FaTwitter /></a>
+                      <a href="#" title="Instagram"><FaInstagram /></a>
                     </div>
                   </Card.Body>
                 </Card>
@@ -162,12 +176,15 @@
               {/* Products Section with actual data */}
               <Col md={9}>
                 <div className="category-filter">
+                  <div className="filter-header">
+                    <FaFilter />
+                    <h5>Filter Products</h5>
+                  </div>
                   {categories.map((category) => (
                     <Button
                       key={category}
                       variant={activeCategory === category ? "primary" : "outline-primary"}
                       onClick={() => setActiveCategory(category)}
-                      className="me-2 mb-2"
                     >
                       {category}
                     </Button>
@@ -176,7 +193,7 @@
 
                 <Row className="products-grid">
                   {filteredProducts.map((product) => (
-                    <Col key={product.id}  className="mb-4">
+                    <Col key={product.id} className="mb-4">
                       <Card className="product-card">
                         <div className="product-image">
                           <Card.Img 
@@ -187,31 +204,58 @@
                               e.target.src = getDefaultImage();
                             }}
                           />
-                          {product.status === 'OUT_OF_STOCK' && (
+                          {/* {product.status === 'OUT_OF_STOCK' && (
                             <div className="out-of-stock">Out of Stock</div>
+                          )} */}
+                          {product.isNew && (
+                            <div className="product-badge new">New</div>
+                          )}
+                          {product.isOnSale && (
+                            <div className="product-badge sale">Sale</div>
                           )}
                         </div>
                         <Card.Body>
                           <Card.Title>{product.name}</Card.Title>
-                          <Card.Text className="price">₹{product.price}</Card.Text>
-                          <Card.Text className="description">
-                            {product.description}
-                          </Card.Text>
-                          <Link 
-                            to={`/shop/${shopId}/product/${product.id}`}
-                            className="w-100"
-                          >
+                          <div className="price">
+                            ${product.price.toFixed(2)}
+                            {product.originalPrice && (
+                              <span className="original-price">${product.originalPrice.toFixed(2)}</span>
+                            )}
+                          </div>
+                          <Card.Text className="description">{product.description}</Card.Text>
+                          <div className="product-meta">
+                            {/* <div className={`stock-status ${product.status === 'IN_STOCK' ? 'in-stock' : product.status === 'LOW_STOCK' ? 'low-stock' : 'out-of-stock'}`}>
+                              {product.status === 'IN_STOCK' ? <FaCheckCircle /> : product.status === 'LOW_STOCK' ? <FaExclamationCircle /> : <FaTimesCircle />}
+                              {product.status === 'IN_STOCK' ? 'In Stock' : product.status === 'LOW_STOCK' ? 'Low Stock' : 'Out of Stock'}
+                            </div> */}
+                            {product.category && (
+                              <span className="category-tag">{product.category}</span>
+                            )}
+                          </div>
+                          <Link to={`/shop/${shopId}/product/${product.id}`}>
                             <Button 
                               variant="primary" 
-                              className="w-100"
+                              className="add-to-cart-btn"
                             >
-                              View Product
+                              View Details <i className="bi bi-arrow-right"></i>
                             </Button>
                           </Link>
                         </Card.Body>
                       </Card>
                     </Col>
                   ))}
+                  {filteredProducts.length === 0 && (
+                    <Col xs={12}>
+                      <div className="no-products">
+                        <FaSearch />
+                        <h4>No Products Found</h4>
+                        <p>We couldn't find any products in this category. Please try another category or check back later.</p>
+                        <Button variant="primary" onClick={() => setActiveCategory('All')}>
+                          View All Products
+                        </Button>
+                      </div>
+                    </Col>
+                  )}
                 </Row>
               </Col>
             </Row>

@@ -27,34 +27,7 @@ const MyShop = () => {
   // };
 
   const dummyRecentProducts = [
-    {
-      id: 1,
-      name: "Steel Chair",
-      price: 2500,
-      stock: 20,
-      imageUrl: "https://via.placeholder.com/200"
-    },
-    {
-      id: 2,
-      name: "Office Desk",
-      price: 7500,
-      stock: 10,
-      imageUrl: "https://via.placeholder.com/200"
-    },
-    {
-      id: 3,
-      name: "Filing Cabinet",
-      price: 4500,
-      stock: 15,
-      imageUrl: "https://via.placeholder.com/200"
-    },
-    {
-      id: 4,
-      name: "Steel Table",
-      price: 3500,
-      stock: 8,
-      imageUrl: "https://via.placeholder.com/200"
-    }
+   
   ];
 
   const [shopInfo, setShopInfo] = useState([]);
@@ -359,7 +332,7 @@ const MyShop = () => {
             </Card.Header>
             <Card.Body>
               <Row>
-                {recentProducts.map((product) => (
+                {recentProducts.length > 0 ? (recentProducts.map((product) => (
                   <Col md={3} key={product.id} className="mb-3">
                     <Card>
                       <Card.Img
@@ -382,7 +355,7 @@ const MyShop = () => {
                       </Card.Body>
                     </Card>
                   </Col>
-                ))}
+                ))):<center>"No products found"</center>}
               </Row>
             </Card.Body>
           </Card>

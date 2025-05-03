@@ -24,12 +24,7 @@ ChartJS.register(
 );
 
 const initialProducts = [
-  { id: 1, name: "T-Shirt", category: "Clothing", price: 29, stock: 50 },
-  { id: 2, name: "Jeans", category: "Clothing", price: 59, stock: 20 },
-  { id: 3, name: "Smartphone", category: "Electronics", price: 499, stock: 10 },
-  { id: 4, name: "Laptop", category: "Electronics", price: 999, stock: 5 },
-  { id: 5, name: "Blender", category: "Home Appliances", price: 79, stock: 15 },
-];
+  ];
 
 const ManageProducts = () => {
   const [products, setProducts] = useState(initialProducts);
@@ -100,7 +95,7 @@ const ManageProducts = () => {
         </div>
 
         <div className="products-grid">
-          {filteredProducts.map((product) => (
+          {filteredProducts.length > 0 ?(filteredProducts.map((product) => (
             <div key={product.id} className="mb-4">
               <Card className="product-card h-100">
                 <Card.Body>
@@ -130,7 +125,7 @@ const ManageProducts = () => {
                 </Card.Body>
               </Card>
             </div>
-          ))}
+          ))):<center>No products found</center>}
         </div>
 
         <div className="mt-5">

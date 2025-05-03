@@ -18,6 +18,7 @@ import ShopView from "../pages/ShopView";
 
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import ProductView from "../pages/ProductView";
+import BrowseShops from "../pages/BrowseShops";
 
 const AppRouter = () => {
   return (
@@ -62,6 +63,7 @@ const AuthConsumer = () => {
           }
         />
         <Route path="/about" element={<About />} />
+        <Route path="/browse-shops" element={<BrowseShops/>}></Route>
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<SignUp />} />
