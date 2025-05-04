@@ -1,0 +1,191 @@
+.shop-registration-page {
+  background-color: #f8fafc;
+  padding: 2rem 0 4rem;
+  min-height: 100vh;
+}
+.shop-registration-page .page-header {
+  margin-bottom: 2rem;
+}
+.shop-registration-page .page-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fafaef;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.shop-registration-page .page-header h1 .icon {
+  color: #3b82f6;
+}
+.shop-registration-page .page-header p {
+  color: #ffffff;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.shop-registration-page .registration-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+.shop-registration-page .registration-card .card-body {
+  padding: 2rem;
+}
+@media (max-width: 768px) {
+  .shop-registration-page .registration-card .card-body {
+    padding: 1.5rem;
+  }
+}
+.shop-registration-page .section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+.shop-registration-page .section-title .section-icon {
+  color: #3b82f6;
+}
+.shop-registration-page .form-label {
+  font-weight: 500;
+  color: #475569;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+.shop-registration-page .form-control, .shop-registration-page .form-select {
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.95rem;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+.shop-registration-page .form-control:focus, .shop-registration-page .form-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.shop-registration-page .form-control::-moz-placeholder, .shop-registration-page .form-select::-moz-placeholder {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+.shop-registration-page .form-control::placeholder, .shop-registration-page .form-select::placeholder {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+.shop-registration-page .form-control.is-invalid, .shop-registration-page .form-select.is-invalid {
+  border-color: #ef4444;
+  background-image: none;
+  padding-right: 0.75rem;
+}
+.shop-registration-page .form-control.is-invalid:focus, .shop-registration-page .form-select.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+.shop-registration-page .invalid-feedback {
+  font-size: 0.8rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+}
+.shop-registration-page .image-upload-section {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px dashed #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.shop-registration-page .image-upload-section .image-preview {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.shop-registration-page .image-upload-section .image-preview .placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #94a3b8;
+}
+.shop-registration-page .image-upload-section .image-preview .placeholder p {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.shop-registration-page .image-upload-section .upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+.shop-registration-page .image-upload-section .upload-btn:hover {
+  background-color: #0b63f3;
+  transform: translateY(-2px);
+}
+.shop-registration-page .image-upload-section .image-hint {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: #64748b;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shop-registration-page .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+.shop-registration-page .form-actions .btn {
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.shop-registration-page .form-actions .btn-primary {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+.shop-registration-page .form-actions .btn-primary:hover {
+  background-color: #0b63f3;
+  border-color: #0b63f3;
+}
+.shop-registration-page .form-actions .btn-secondary {
+  background-color: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+.shop-registration-page .form-actions .btn-secondary:hover {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}
+@media (max-width: 992px) {
+  .shop-registration-page .image-upload-section {
+    margin-bottom: 2rem;
+  }
+}/*# sourceMappingURL=shopregistration.css.map */

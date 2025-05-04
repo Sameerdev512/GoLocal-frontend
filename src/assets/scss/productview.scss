@@ -15,7 +15,7 @@
     font-size: 0.9rem;
     
     &:hover {
-      color: #3b82f6;
+      color: #fdfeff;
       transform: translateX(-5px);
     }
     
@@ -41,6 +41,14 @@
     border: 1px solid #e2e8f0;
     
     .carousel {
+      .carousel-inner{
+        .carousel-item{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 3rem;
+        }
+      }
       .carousel-control-prev,
       .carousel-control-next {
         width: 8%;
@@ -377,7 +385,8 @@
       }
 
       .image-container {
-        height: 140px;
+        margin-top: 2rem;
+        height: 150px;
         overflow: hidden;
         position: relative;
         

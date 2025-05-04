@@ -1,6 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import AuthContext from '../Utility/AuthContext';
 import '../assets/scss/navbar.scss';
+import { FaUser, FaQuestionCircle, FaSignOutAlt } from 'react-icons/fa';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -86,15 +87,28 @@ const Navbar = () => {
                   </li>
                 </ul>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ marginLeft: "60vw" }}>
-                  <li className="nav-item">
-                    <button className="btn btn-dark" onClick={handleLogout}>
-                      Logout
-                    </button>
-                  </li>
-                  <li className="nav-item">
-                    <Link className={isActive("/profile")} to="/profile">
-                      Profile
-                    </Link>
+                  <li className="nav-item dropdown profile-dropdown">
+                    <div className="nav-link dropdown-toggle" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <FaUser className="profile-icon" />
+                    </div>
+                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                      <li>
+                        <Link className="dropdown-item" to="/profile">
+                          <FaUser className="me-2" /> My Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/my-enquiries">
+                          <FaQuestionCircle className="me-2" /> My Enquiries
+                        </Link>
+                      </li>
+                      <li><hr className="dropdown-divider" /></li>
+                      <li>
+                        <button className="dropdown-item" onClick={handleLogout}>
+                          <FaSignOutAlt className="me-2" /> Logout
+                        </button>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </>
@@ -126,15 +140,28 @@ const Navbar = () => {
                     </li>
                 </ul>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ marginLeft: "60vw" }}>
-                  <li className="nav-item">
-                    <button className="btn btn-dark" onClick={handleLogout}>
-                      Logout
-                    </button>
-                  </li>
-                  <li className="nav-item">
-                    <Link className={isActive("/profile")} to="/profile">
-                      Profile
-                    </Link>
+                  <li className="nav-item dropdown profile-dropdown">
+                    <div className="nav-link dropdown-toggle" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <FaUser className="profile-icon" />
+                    </div>
+                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                      <li>
+                        <Link className="dropdown-item" to="/profile">
+                          <FaUser className="me-2" /> My Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/my-enquiries">
+                          <FaQuestionCircle className="me-2" /> My Enquiries
+                        </Link>
+                      </li>
+                      <li><hr className="dropdown-divider" /></li>
+                      <li>
+                        <button className="dropdown-item" onClick={handleLogout}>
+                          <FaSignOutAlt className="me-2" /> Logout
+                        </button>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </>
@@ -166,15 +193,28 @@ const Navbar = () => {
                   </li>
                 </ul>
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ marginLeft: "50vw" }}>
-                  <li className="nav-item">
-                    <button className="btn btn-dark" onClick={handleLogout}>
-                      Logout
-                    </button>
-                  </li>
-                  <li className="nav-item">
-                    <Link className={isActive("/profile")} to="/profile">
-                      Profile
-                    </Link>
+                  <li className="nav-item dropdown profile-dropdown">
+                    <div className="nav-link dropdown-toggle" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <FaUser className="profile-icon" />
+                    </div>
+                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                      <li>
+                        <Link className="dropdown-item" to="/profile">
+                          <FaUser className="me-2" /> My Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/my-enquiries">
+                          <FaQuestionCircle className="me-2" /> My Enquiries
+                        </Link>
+                      </li>
+                      <li><hr className="dropdown-divider" /></li>
+                      <li>
+                        <button className="dropdown-item" onClick={handleLogout}>
+                          <FaSignOutAlt className="me-2" /> Logout
+                        </button>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </>

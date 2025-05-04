@@ -46,91 +46,81 @@ $container-max-width: 1400px;
     padding: 0 2rem;
   }
 
-  .back-nav-button {
-    color: $secondary;
-    font-weight: 600;
-    padding: 0.75rem 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    
-    &:hover {
-      color: $primary;
-    }
-
-    svg {
-      font-size: 1.25rem;
-    }
-  }
-
-  .shop-header-card {
-    background: linear-gradient(135deg, $primary, darken($primary, 15%));
-    border: none;
-    border-radius: $border-radius;
-    box-shadow: $card-shadow;
-    padding: 2.5rem;
+  .shop-top-nav {
     margin-bottom: 2rem;
-
-    .shop-title {
-      color: $white;
-      font-size: 2.25rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.025em;
-    }
-
-    .status-badge {
-      font-size: 0.875rem;
+    
+    .back-nav-button {
+      color: $secondary;
       font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 2rem;
-      background: rgba($white, 0.15);
-      color: $white;
-      backdrop-filter: blur(4px);
-
-      &.verified {
-        background: rgba($success, 0.2);
-        color: lighten($success, 40%);
-      }
-    }
-
-    .edit-button {
-      background: rgba($white, 0.1);
-      border: 1px solid rgba($white, 0.2);
-      color: $white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      backdrop-filter: blur(4px);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
       
       &:hover {
-        background: rgba($white, 0.2);
-        transform: translateY(-2px);
+        color: $primary;
+      }
+
+      svg {
+        font-size: 1.25rem;
+      }
+    }
+    
+    .shop-name {
+      color: $dark;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    
+    .shop-status {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      
+      .status-badge {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.35rem 0.75rem;
+        border-radius: 2rem;
+        background: rgba($secondary, 0.15);
+        color: $secondary;
+        
+        &.verified {
+          background: rgba($success, 0.15);
+          color: $success;
+        }
+      }
+      
+      .shop-category {
+        color: $secondary;
+        font-size: 0.875rem;
       }
     }
   }
 
   .stats-section {
-    margin: 2.5rem 0;
+    margin-bottom: 2rem;
 
     .stat-card {
       border: none;
       border-radius: $border-radius;
       box-shadow: $card-shadow;
       background: $white;
-      padding: 2rem;
+      padding: 1.5rem;
       @include card-hover;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
 
       .stat-icon {
-        width: 64px;
-        height: 64px;
-        border-radius: 1rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 0.75rem;
         @include flex-center;
-        font-size: 1.75rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
 
         &.products {
           background: rgba($primary, 0.1);
@@ -149,18 +139,81 @@ $container-max-width: 1400px;
       }
 
       .stat-value {
-        font-size: 2.75rem;
+        font-size: 2.25rem;
         font-weight: 700;
         color: $dark;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
         letter-spacing: -0.025em;
       }
 
       .stat-label {
         color: $gray-400;
-        font-size: 1rem;
+        font-size: 0.875rem;
         font-weight: 500;
         margin: 0;
+      }
+      
+      &.products-card {
+        background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%);
+        color: white;
+        
+        .stat-icon {
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+        }
+        
+        .stat-value {
+          color: white;
+        }
+        
+        .stat-label {
+          color: rgba(255, 255, 255, 0.8);
+        }
+      }
+      
+      &.low-stock-card {
+        background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+        color: white;
+        
+        .stat-icon {
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+        }
+        
+        .stat-value {
+          color: white;
+        }
+        
+        .stat-label {
+          color: rgba(255, 255, 255, 0.8);
+        }
+      }
+      
+      &.manage-card {
+        background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+        color: white;
+        
+        .stat-icon {
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+        }
+        
+        .stat-value {
+          color: white;
+          
+          a {
+            color: white !important;
+            text-decoration: none;
+            
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+        
+        .stat-label {
+          color: rgba(255, 255, 255, 0.8);
+        }
       }
     }
   }
@@ -222,97 +275,68 @@ $container-max-width: 1400px;
     }
   }
 
-  .recent-products-card {
+  // Product card styling
+  .product-card {
     border: none;
     border-radius: $border-radius;
     box-shadow: $card-shadow;
-    background: $white;
     overflow: hidden;
+    @include card-hover;
 
-    .card-header {
-      background: $white;
-      border-bottom: 1px solid $gray-200;
-      padding: 1.5rem 2rem;
+    .product-img-container {
+      height: 180px;
+      overflow: hidden;
+      background: $gray-100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      h3 {
-        margin: 0;
-        color: $dark;
-        font-weight: 700;
-        font-size: 1.5rem;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
-      .view-all-link {
-        color: $primary;
-        text-decoration: none;
-        font-weight: 600;
+      .no-image-placeholder {
+        width: 100%;
+        height: 100%;
+        @include flex-center;
+        color: $gray-400;
         font-size: 0.875rem;
-        transition: color 0.2s ease;
-        
-        &:hover {
-          color: darken($primary, 10%);
-        }
       }
     }
 
     .card-body {
-      padding: 2rem;
+      padding: 1.25rem;
     }
 
-    .product-card {
-      border: 1px solid $gray-200;
-      border-radius: $border-radius;
-      background: $white;
-      height: 100%;
-      @include card-hover;
+    .product-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: $dark;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 2.8rem;
+    }
 
-      .product-image {
-        height: 220px;
-        object-fit: contain;
-        border-radius: $border-radius $border-radius 0 0;
-        width: 100%;
-      }
+    .product-price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: $primary;
+      margin-bottom: 0.5rem;
+    }
 
-      .card-body {
-        padding: 1.25rem;
-      }
+    .product-stock {
+      font-size: 0.875rem;
+      color: $gray-400;
+      margin-bottom: 0.5rem;
+    }
 
-      .card-title {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: $dark;
-        margin-bottom: 0.75rem;
-      }
-
-      .product-details {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0.75rem 0;
-
-        .price {
-          color: $primary;
-          font-weight: 700;
-          font-size: 1.25rem;
-        }
-
-        .stock {
-          color: $gray-400;
-          font-size: 0.875rem;
-          font-weight: 500;
-        }
-      }
-
-      .btn-outline-primary {
-        width: 100%;
-        border-radius: 0.5rem;
-        padding: 0.75rem;
-        font-weight: 600;
-        transition: all 0.2s ease;
-
-        &:hover {
-          transform: translateY(-2px);
-        }
-      }
+    .card-footer {
+      padding: 1rem 1.25rem;
     }
   }
 }

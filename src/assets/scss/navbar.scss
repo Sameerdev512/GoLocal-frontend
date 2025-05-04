@@ -77,13 +77,48 @@
     }
   }
 
-  // Profile Link
-  a[href="/profile"] {
-    color: rgba(255, 255, 255, 0.9);
-    margin-left: 0.5rem;
+  // Profile Icon Dropdown
+  .profile-dropdown {
+    .nav-link {
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      .profile-icon {
+        font-size: 1.25rem;
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 0.5rem;
+        border-radius: 50%;
+        width: 2.25rem;
+        height: 2.25rem;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
     
-    &:hover {
-      color: #fff;
+    .dropdown-menu {
+      margin-top: 0.5rem;
+      border: none;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      border-radius: 0.5rem;
+      
+      .dropdown-item {
+        padding: 0.5rem 1rem;
+        
+        &:hover {
+          background-color: rgba(0, 123, 255, 0.1);
+        }
+        
+        &:active {
+          background-color: rgba(0, 123, 255, 0.2);
+        }
+      }
     }
   }
 

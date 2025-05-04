@@ -12,10 +12,12 @@ const ProductView = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [enquiryForm, setEnquiryForm] = useState({
-    name: '',
+    userName: '',
     email: '',
     contactNo: '',
-    message: ''
+    message: '',
+    productId: productId,
+    productName: product?.name,
   });
 
   const loadProductDetails = async () => {
@@ -79,10 +81,27 @@ const ProductView = () => {
     return <div>Product not found</div>;
   }
 
-  const handleEnquirySubmit = (e) => {
+  const handleEnquirySubmit = async(e) => {
     e.preventDefault();
     console.log('Product ID:', productId);
     console.log('Enquiry Details:', enquiryForm);
+
+    const response = await fetch(`http://localhost:8080/api/user/submit-enquiry`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(enquiryForm),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to send enquiry');
+    }
+
+    const result = await response.json();
+    alert(result.message);
+
     setShowEnquiryModal(false);
     setEnquiryForm({ name: '', email: '', contactNo: '', message: '' });
   };
@@ -244,9 +263,9 @@ const ProductView = () => {
               <Form.Control
                 type="text"
                 required
-                value={enquiryForm.name}
+                value={enquiryForm.userName}
                 onChange={(e) =>
-                  setEnquiryForm({ ...enquiryForm, name: e.target.value })
+                  setEnquiryForm({ ...enquiryForm, userName: e.target.value })
                 }
               />
             </Form.Group>

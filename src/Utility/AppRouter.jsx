@@ -15,6 +15,7 @@ import MyShop from "../screens/seller/MyShop";
 import Profile from "../pages/Profile";
 import ViewProduct from "../screens/seller/ViewProduct";
 import ShopView from "../pages/ShopView";
+import MyEnquiries from "../pages/MyEnquiries";
 
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import ProductView from "../pages/ProductView";
@@ -69,6 +70,7 @@ const AuthConsumer = () => {
         <Route path="/auth/register" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/shop/:shopId/product/:productId" element={<ProductView />} />
+        <Route path="/my-enquiries" element={<MyEnquiries />} />
 
         {/* seller routes */}
         <Route

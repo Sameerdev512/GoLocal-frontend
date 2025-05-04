@@ -51,6 +51,7 @@ const Home = () => {
       });
 
       const result = await response.json();
+      console.log(result)
       setAllShops(result);
     } catch(error) {
       console.error("Error fetching shop details:", error);
@@ -87,7 +88,7 @@ const Home = () => {
         <div className="card-image-wrapper">
           <Card.Img 
             variant="top" 
-            src={shop.image || getDefaultImage()}
+            src={shop.imageurl || getDefaultImage()}
             alt={shop.shopName}
             onError={(e) => {
               e.target.src = getDefaultImage();
@@ -107,7 +108,7 @@ const Home = () => {
             </div>
             <span className="rating-count">{shop.reviewCount || "New"}</span>
           </div>
-          <Card.Text className="shop-description">{shop.description}</Card.Text>
+          <Card.Text className="shop-description">{shop.description ? shop.description.split(' ').slice(0, 10).join(' ') : "No description available"}</Card.Text>
           <div className="shop-location">
             <FaMapMarkerAlt />
             <span>{shop.city}, {shop.state}</span>

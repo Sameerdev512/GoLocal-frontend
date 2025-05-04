@@ -60,12 +60,40 @@
   background-color: rgba(255, 255, 255, 0.1);
   border-color: #fff;
 }
-.navbar a[href="/profile"] {
-  color: rgba(255, 255, 255, 0.9);
-  margin-left: 0.5rem;
+.navbar .profile-dropdown .nav-link {
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.navbar a[href="/profile"]:hover {
+.navbar .profile-dropdown .nav-link .profile-icon {
+  font-size: 1.25rem;
   color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 2.25rem;
+  height: 2.25rem;
+  transition: all 0.2s ease;
+}
+.navbar .profile-dropdown .nav-link .profile-icon:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.navbar .profile-dropdown .dropdown-menu {
+  margin-top: 0.5rem;
+  border: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+}
+.navbar .profile-dropdown .dropdown-menu .dropdown-item {
+  padding: 0.5rem 1rem;
+}
+.navbar .profile-dropdown .dropdown-menu .dropdown-item:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+.navbar .profile-dropdown .dropdown-menu .dropdown-item:active {
+  background-color: rgba(0, 123, 255, 0.2);
 }
 .navbar .navbar-toggler {
   border: none;
