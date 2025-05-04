@@ -88,7 +88,7 @@ const Home = () => {
         <div className="card-image-wrapper">
           <Card.Img 
             variant="top" 
-            src={shop.imageurl || getDefaultImage()}
+            src={shop.imageUrl || getDefaultImage()}
             alt={shop.shopName}
             onError={(e) => {
               e.target.src = getDefaultImage();

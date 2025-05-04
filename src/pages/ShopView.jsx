@@ -94,7 +94,7 @@
         <div className="shop-view">
           {/* Shop Header with real shop data */}
           <div className="shop-header" style={{ 
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${shop.imageurl || getDefaultImage()})` 
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${shop.imageUrl || getDefaultImage()})` 
           }}>
             <Container>
               <Row className="align-items-center">

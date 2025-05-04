@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { Container, Row, Col, Card, Button, Table } from "react-bootstrap";
-import { Bar } from "react-chartjs-2";
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card, Button, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,9 +10,9 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js";
-import { Link } from "react-router-dom";
-import Navbar from "../../componants/Navbar";
+} from 'chart.js';
+import Navbar from '../../componants/Navbar';
+import { FaQuestionCircle } from 'react-icons/fa';
 
 // Register chart.js components
 ChartJS.register(
@@ -23,11 +24,82 @@ ChartJS.register(
   Legend
 );
 
+
+
 const SellerDashboard = () => {
   const [orders] = useState([
     { id: 1, customer: "John Doe", status: "Pending", amount: "$150" },
     { id: 2, customer: "Jane Smith", status: "Completed", amount: "$250" },
   ]);
+  
+  const [enquiriesCount, setEnquiriesCount] = useState(0);
+  const[totalproducts, setTotalproducts] = useState(0);
+  const [pendingEnquiriesCount, setPendingEnquiriesCount] = useState(0);
+
+  useEffect(() => {
+    // Fetch enquiries count
+    fetchEnquiriesCount();
+    loadSellerProducts();
+  }, []);
+
+  const fetchEnquiriesCount = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/seller/get-all-shop-enquiries`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch enquiries count");
+      }
+
+      const result = await response.json();
+      console.log(result.length);
+
+      const pendingEnquiries = result.reduce((acc, enquiry) => {
+        if (enquiry.status === 'pending') {
+          acc++;
+        }
+        return acc;
+      }, 0);
+      console.log(pendingEnquiries)
+      setPendingEnquiriesCount(pendingEnquiries);
+      setEnquiriesCount(result.total || 0);
+    } catch (error) {
+      console.error("Error fetching enquiries count:", error);
+    }
+  };
+
+  const loadSellerProducts = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/seller/findAllProducts`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
+      }
+
+      const result = await response.json();
+      console.log(result);
+      setTotalproducts(result.length);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
   const earningsData = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May"],
@@ -42,40 +114,52 @@ const SellerDashboard = () => {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <Container className="mt-4">
         <h2 className="mb-4 text-center">Seller Dashboard</h2>
 
         {/* Dashboard Summary Cards */}
         <Row className="mb-4">
           <Col md={3}>
-          
             <Card className="text-center">
               <Card.Body>
                 <Card.Title>Manage Shop</Card.Title>
+                <p></p>
                 <Link to="/seller/myShop">
-                <Button variant="primary">Edit Shop</Button>
+                  <Button variant="primary">Edit Shop</Button>
                 </Link>
               </Card.Body>
             </Card>
-              
           </Col>
           <Col md={3}>
             <Card className="text-center">
               <Card.Body>
                 <Card.Title>Products</Card.Title>
+                <p>{totalproducts} Total Products</p>
                 <Link to="/seller/manageProducts">
                   <Button variant="primary">Manage Products</Button>
                 </Link>
               </Card.Body>
             </Card>
           </Col>
-          <Col md={3}>
+          {/* <Col md={3}>
             <Card className="text-center">
               <Card.Body>
                 <Card.Title>Orders</Card.Title>
                 <p>{orders.length} Pending Orders</p>
                 <Button variant="primary">View Orders</Button>
+              </Card.Body>
+            </Card>
+          </Col> */}
+
+          <Col md={3}>
+            <Card className="text-center">
+              <Card.Body>
+                <Card.Title>Enquiries</Card.Title>
+                <p>{pendingEnquiriesCount} Pending Enquiries</p>
+                <Link to="/seller/enquiries">
+                  <Button variant="primary">View Enquiries</Button>
+                </Link>
               </Card.Body>
             </Card>
           </Col>

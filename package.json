@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.8",
+    "chart.js": "^4.4.9",
     "framer-motion": "^12.6.5",
     "nodemon": "^3.1.9",
     "react": "^19.0.0",

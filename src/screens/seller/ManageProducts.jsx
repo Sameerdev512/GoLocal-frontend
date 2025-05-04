@@ -159,7 +159,9 @@ const ManageProducts = () => {
         <Container>
           <div className="page-header">
             <div className="header-content">
-              <h1><FaBoxOpen className="header-icon" /> Manage Products</h1>
+              <h1>
+                <FaBoxOpen className="header-icon" /> Manage Products
+              </h1>
               <p>View, edit and manage your product inventory</p>
             </div>
             <Link to="/seller/manageProducts/addProduct">
@@ -187,7 +189,11 @@ const ManageProducts = () => {
                 {categories.map((category) => (
                   <Button
                     key={category}
-                    variant={selectedCategory === category ? "primary" : "outline-secondary"}
+                    variant={
+                      selectedCategory === category
+                        ? "primary"
+                        : "outline-secondary"
+                    }
                     className="category-btn"
                     onClick={() => setSelectedCategory(category)}
                   >
@@ -213,9 +219,13 @@ const ManageProducts = () => {
                       <div className="product-image-container">
                         <Card.Img
                           className="product-image"
-                          src={product.imageUrl || "https://via.placeholder.com/300x200?text=No+Image"}
+                          src={
+                            product.imageUrl ||
+                            "https://via.placeholder.com/300x200?text=No+Image"
+                          }
                           onError={(e) => {
-                            e.target.src = "https://via.placeholder.com/300x200?text=No+Image";
+                            e.target.src =
+                              "https://via.placeholder.com/300x200?text=No+Image";
                           }}
                         />
                         <div className="product-status">
@@ -223,7 +233,9 @@ const ManageProducts = () => {
                         </div>
                       </div>
                       <Card.Body>
-                        <Card.Title className="product-title">{product.name}</Card.Title>
+                        <Card.Title className="product-title">
+                          {product.name}
+                        </Card.Title>
                         <div className="product-category">
                           <FaTag className="category-icon" />
                           <span>{product.category || "Uncategorized"}</span>
@@ -233,15 +245,22 @@ const ManageProducts = () => {
                           <div className="stock">Stock: {product.stock}</div>
                         </div>
                         <Card.Text className="product-description">
+                          <strong>Desc : </strong>
                           {product.description}
+                          <br></br>
+                          <strong>Id : </strong>
+                          {product.id}
                         </Card.Text>
+
                         <div className="product-actions">
                           <Link to={`/viewProduct/${product.id}`}>
-                            <Button variant="outline-primary" className="action-btn view-btn">
+                            <Button
+                              variant="outline-primary"
+                              className="action-btn view-btn"
+                            >
                               <FaEye /> View
                             </Button>
                           </Link>
-                          
                         </div>
                       </Card.Body>
                     </Card>
@@ -252,14 +271,14 @@ const ManageProducts = () => {
                   <FaSearch size={40} />
                   <h3>No Products Found</h3>
                   <p>
-                    {searchTerm 
+                    {searchTerm
                       ? "No products match your search criteria. Try different keywords or clear your search."
-                      : selectedCategory !== "All" 
-                        ? `No products found in the "${selectedCategory}" category.`
-                        : "You haven't added any products yet. Click 'Add New Product' to get started."}
+                      : selectedCategory !== "All"
+                      ? `No products found in the "${selectedCategory}" category.`
+                      : "You haven't added any products yet. Click 'Add New Product' to get started."}
                   </p>
                   {(searchTerm || selectedCategory !== "All") && (
-                    <Button 
+                    <Button
                       variant="outline-primary"
                       onClick={() => {
                         setSearchTerm("");

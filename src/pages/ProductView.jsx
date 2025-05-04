@@ -17,8 +17,19 @@ const ProductView = () => {
     contactNo: '',
     message: '',
     productId: productId,
-    productName: product?.name,
+    shopId: shopId,
+    productName: '', // Initialize with empty string instead of product.name
   });
+
+  // Update enquiryForm when product data is loaded
+  useEffect(() => {
+    if (product) {
+      setEnquiryForm(prev => ({
+        ...prev,
+        productName: product.name || ''
+      }));
+    }
+  }, [product]);
 
   const loadProductDetails = async () => {
     try {
@@ -32,6 +43,7 @@ const ProductView = () => {
         }
       );
       const result = await response.json();
+      console.log(result);
       setProduct(result);
       setLoading(false);
     } catch (error) {
@@ -61,6 +73,8 @@ const ProductView = () => {
       console.error("Error fetching shop products:", error);
     }
   };
+
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
