@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaQuestionCircle, FaFilter, FaSearch, FaArrowLeft, FaReply } from 'react-icons/fa';
 import Navbar from '../../componants/Navbar';
 import '../../assets/scss/enquiries.scss';
+import { API_BASE_URL } from '../../Utility/config';
 
 const SellerEnquiries = () => {
   const [enquiries, setEnquiries] = useState([]);
@@ -23,7 +24,7 @@ const SellerEnquiries = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:8080/api/seller/get-all-shop-enquiries`,
+        `${API_BASE_URL}/api/seller/get-all-shop-enquiries`,
         {
           method: "GET",
           headers: {
@@ -111,7 +112,7 @@ const SellerEnquiries = () => {
     setSubmitting(true);
     try {
       const response = await fetch(
-        `http://localhost:8080/api/seller/respond-to-enquiry/${enquiryId}`,
+        `${API_BASE_URL}/api/seller/respond-to-enquiry/${enquiryId}`,
         {
           method: "PUT",
           headers: {

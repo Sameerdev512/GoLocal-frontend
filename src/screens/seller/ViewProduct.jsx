@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../assets/scss/global.scss";
+import { API_BASE_URL } from "../../Utility/config";
 
 const ViewProduct = () => {
   const { productId } = useParams();
@@ -15,7 +16,7 @@ const ViewProduct = () => {
   const showProductDetails = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/products/${productId}`,
+        `${API_BASE_URL}/api/products/${productId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +53,7 @@ const ViewProduct = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/seller/updateproduct/${productId}`,
+        `${API_BASE_URL}/api/seller/updateproduct/${productId}`,
         {
           method: "PUT",
           headers: {
@@ -80,7 +81,7 @@ const ViewProduct = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/seller/products/${productId}`,
+        `${API_BASE_URL}/api/seller/products/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -107,7 +108,7 @@ const ViewProduct = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/products/${productId}/images`,
+        `${API_BASE_URL}/api/products/${productId}/images`,
         {
           method: "POST",
           headers: {
@@ -132,7 +133,7 @@ const ViewProduct = () => {
 //   const handleStatusChange = async (newStatus) => {
 //     try {
 //       const response = await fetch(
-//         `http://localhost:8080/api/seller/updateproduct/${productId}/status`,
+//         `${API_BASE_URL}/api/seller/updateproduct/${productId}/status`,
 //         {
 //           method: "PUT",
 //           headers: {

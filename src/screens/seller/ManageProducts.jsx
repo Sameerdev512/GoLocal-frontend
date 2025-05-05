@@ -14,6 +14,7 @@ import Navbar from "../../componants/Navbar";
 import { Link } from "react-router-dom";
 import { FaPlus, FaSearch, FaFilter, FaEdit, FaEye, FaTrash, FaBoxOpen, FaTag, FaChartBar } from "react-icons/fa";
 import './styles/ManageProducts.css';
+import { API_BASE_URL } from "../../Utility/config";
 
 ChartJS.register(
   CategoryScale,
@@ -81,7 +82,7 @@ const ManageProducts = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:8080/api/seller/findAllProducts`,
+        `${API_BASE_URL}/api/seller/findAllProducts`,
         {
           method: "GET",
           headers: {
@@ -129,7 +130,7 @@ const ManageProducts = () => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/seller/deleteProduct/${productId}`,
+          `${API_BASE_URL}/api/seller/deleteProduct/${productId}`,
           {
             method: "DELETE",
             headers: {

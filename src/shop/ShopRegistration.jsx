@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { FaStore, FaUser, FaMapMarkerAlt, FaPhone, FaImage, FaInfoCircle } from 'react-icons/fa';
 import '../assets/scss/shopregistration.scss';
+import { API_BASE_URL } from '../Utility/config';
 
 const ShopRegistration = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const ShopRegistration = () => {
     formData.append("imageUrl", data.shopImage[0]);
 
     try {
-      const response = await fetch(`http://localhost:8080/api/user/registershop`, {
+      const response = await fetch(`${API_BASE_URL}/api/user/registershop`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,

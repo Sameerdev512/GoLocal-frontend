@@ -4,6 +4,7 @@ import { Container, Row, Col, Card, Button, Badge, Form } from 'react-bootstrap'
 import { FaArrowLeft, FaEdit, FaSave, FaTimes, FaBox, FaExclamationTriangle, FaStore } from 'react-icons/fa';
 import Navbar from '../../componants/Navbar';
 import '../../assets/scss/myshop.scss';
+import { API_BASE_URL } from '../../Utility/config';
 
 const MyShop = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const MyShop = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/seller/getShopDetails`,
+        `${API_BASE_URL}/api/seller/getShopDetails`,
         {
           method: "GET",
           headers: {
@@ -56,7 +57,7 @@ const MyShop = () => {
   const loadSellerProducts = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/seller/findAllProducts`,
+        `${API_BASE_URL}/api/seller/findAllProducts`,
         {
           method: "GET",
           headers: {
@@ -89,7 +90,7 @@ const MyShop = () => {
   const handleUpdate = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/seller/updateShopDetails/${shopInfo.id}`,
+        `${API_BASE_URL}/api/seller/updateShopDetails/${shopInfo.id}`,
         {
           method: "PUT",
           headers: {

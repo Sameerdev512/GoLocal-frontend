@@ -13,6 +13,7 @@ import {
 } from 'chart.js';
 import Navbar from '../../componants/Navbar';
 import { FaQuestionCircle } from 'react-icons/fa';
+import { API_BASE_URL } from '../../Utility/config';
 
 // Register chart.js components
 ChartJS.register(
@@ -45,7 +46,7 @@ const SellerDashboard = () => {
   const fetchEnquiriesCount = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/seller/get-all-shop-enquiries`,
+        `${API_BASE_URL}/api/seller/get-all-shop-enquiries`,
         {
           method: "GET",
           headers: {
@@ -79,7 +80,7 @@ const SellerDashboard = () => {
   const loadSellerProducts = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/seller/findAllProducts`,
+        `${API_BASE_URL}/api/seller/findAllProducts`,
         {
           method: "GET",
           headers: {
