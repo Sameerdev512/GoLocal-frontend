@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button, Modal, Form, Carousel, Card } from 'react-bootstrap';
 import Navbar from '../componants/Navbar';
 import '../assets/scss/productview.scss';
+import { API_BASE_URL } from '../Utility/config';
 
 const ProductView = () => {
   const { shopId, productId } = useParams();
@@ -34,7 +35,7 @@ const ProductView = () => {
   const loadProductDetails = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/user/getProductDetails/${productId}`,
+        `${API_BASE_URL}/api/user/getProductDetails/${productId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -54,13 +55,16 @@ const ProductView = () => {
 
   const loadShopProducts = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/user/shopProducts/${shopId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/api/user/shopProducts/${shopId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch shop products');
@@ -100,7 +104,7 @@ const ProductView = () => {
     console.log('Product ID:', productId);
     console.log('Enquiry Details:', enquiryForm);
 
-    const response = await fetch(`http://localhost:8080/api/user/submit-enquiry`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/submit-enquiry`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

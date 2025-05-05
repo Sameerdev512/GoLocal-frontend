@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Modal, ListGroup } from 'react-bootstrap';
 import { FaUser, FaEnvelope, FaList, FaQuestionCircle } from 'react-icons/fa';
 import Navbar from '../componants/Navbar';
 import '../assets/scss/profile.scss';
+import { API_BASE_URL } from '../Utility/config';
 
 const Profile = () => {
   const [showEnquiriesModal, setShowEnquiriesModal] = useState(false);
@@ -22,16 +23,13 @@ const Profile = () => {
   const fetchEnquiries = async () => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/user/my-enquiries`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/api/user/my-enquiries`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Failed to fetch enquiries");

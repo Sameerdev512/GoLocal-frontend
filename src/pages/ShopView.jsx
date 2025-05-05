@@ -6,6 +6,7 @@
   import { Link } from 'react-router-dom';
   import { toast, Bounce } from "react-toastify";
   import { FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaFilter, FaCheckCircle, FaExclamationCircle, FaTimesCircle, FaShoppingCart, FaSearch } from 'react-icons/fa';
+import { API_BASE_URL } from '../Utility/config';
 
   const ShopView = () => {
     const { shopId } = useParams();
@@ -16,13 +17,16 @@
 
     const loadShopDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/user/getShopDetails/${shopId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await fetch(
+          `${API_BASE_URL}/api/user/getShopDetails/${shopId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error('Failed to fetch shop details');
@@ -42,13 +46,16 @@
 
     const loadShopProducts = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/user/shopProducts/${shopId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await fetch(
+          `${API_BASE_URL}/api/user/shopProducts/${shopId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error('Failed to fetch shop products');

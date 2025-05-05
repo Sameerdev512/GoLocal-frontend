@@ -6,6 +6,7 @@ import { Bounce, toast } from "react-toastify";
 import '../assets/scss/home.scss';
 import { FaFilter, FaSearch, FaStore, FaMapMarkerAlt, FaArrowRight, FaStar, FaShoppingBag, FaHandshake, FaUsers } from 'react-icons/fa';
 import { motion } from "framer-motion";
+import { API_BASE_URL } from "../Utility/config";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -43,7 +44,7 @@ const Home = () => {
   const loadShops = async() => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8080/api/user/getAllShops`, {
+      const response = await fetch(`${API_BASE_URL}/api/user/getAllShops`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

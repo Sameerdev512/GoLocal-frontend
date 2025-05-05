@@ -5,6 +5,7 @@ import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap'
 import { FaEnvelope, FaLock, FaGoogle, FaFacebook, FaUser } from 'react-icons/fa';
 import '../assets/scss/auth.scss';
 import Navbar from "../componants/Navbar";
+import { API_BASE_URL } from "../Utility/config";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:8080/auth/register", {
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

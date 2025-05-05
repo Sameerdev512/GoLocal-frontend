@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Badge, Spinner, Button } from 'react-bootstr
 import { FaQuestionCircle, FaFilter, FaSearch } from 'react-icons/fa';
 import Navbar from '../componants/Navbar';
 import '../assets/scss/enquiries.scss';
+import { API_BASE_URL } from '../Utility/config';
 
 const MyEnquiries = () => {
   const [enquiries, setEnquiries] = useState([]);
@@ -19,7 +20,7 @@ const MyEnquiries = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:8080/api/user/get-users-enquiries`,
+        `${API_BASE_URL}/api/user/get-users-enquiries`,
         {
           method: "GET",
           headers: {

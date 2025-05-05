@@ -6,6 +6,7 @@ import Navbar from "../componants/Navbar";
 import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 import { FaEnvelope, FaLock, FaGoogle, FaFacebook } from 'react-icons/fa';
 import '../assets/scss/auth.scss';
+import { API_BASE_URL } from "../Utility/config";
 
 const Login = ({ message }) => {
   const { setRole, setLogin } = useContext(AuthContext);
@@ -19,7 +20,7 @@ const Login = ({ message }) => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:8080/auth/login", {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

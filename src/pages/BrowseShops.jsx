@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { toast, Bounce } from 'react-toastify';
 import Navbar from '../componants/Navbar';
 import '../assets/scss/browseshops.scss';
+import { API_BASE_URL } from '../Utility/config';
 
 const BrowseShops = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -59,7 +60,7 @@ const BrowseShops = () => {
   const loadShops = async() => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8080/api/user/getAllShops`, {
+      const response = await fetch(`${API_BASE_URL}/api/user/getAllShops`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
