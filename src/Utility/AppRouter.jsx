@@ -8,7 +8,7 @@ import AdminDashboard from "../screens/admin/AdminDashboard";
 import UserDashboard from "../screens/user/UserDashboard";
 import AuthContext, { AuthProvider } from "./AuthContext";
 import Home from "../pages/Home";
-import ShopRegistration from "../shop/shopRegistration";
+import ShopRegistration from "../shop/ShopRegistration";
 import ManageProducts from "../screens/seller/ManageProducts";
 import AddProduct from "../screens/seller/AddProduct";
 import MyShop from "../screens/seller/MyShop";
