@@ -61,7 +61,7 @@ const AuthConsumer = () => {
           element={role == "USER" && <UserDashboard />}
         />
         <Route
-          path="/user/shopRegistration"
+          path="/user/shopregistration"
           element={
             role ? <ShopRegistration /> : <Login message="Login Required" />
           }
