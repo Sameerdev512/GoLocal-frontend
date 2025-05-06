@@ -5,6 +5,7 @@ import Navbar from "../../componants/Navbar";
 import { useNavigate } from "react-router-dom";
 import { FaUpload, FaTag, FaBoxOpen, FaInfoCircle, FaDollarSign, FaImage } from "react-icons/fa";
 import "./styles/AddProduct.css"; // Using direct CSS instead of SCSS
+import { API_BASE_URL } from "../../Utility/config";
 
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -44,16 +45,13 @@ const AddProduct = () => {
 
     //sending data to backend
     try {
-      const response = await fetch(
-        "http://localhost:8080/api/seller/addproduct",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/api/seller/addproduct`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
 
       //response from the backend
       const result = await response.json();

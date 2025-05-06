@@ -16,11 +16,13 @@ import Profile from "../pages/Profile";
 import ViewProduct from "../screens/seller/ViewProduct";
 import ShopView from "../pages/ShopView";
 import MyEnquiries from "../pages/MyEnquiries";
+import ManageShops from "../screens/admin/ManageShops";
 
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import ProductView from "../pages/ProductView";
 import BrowseShops from "../pages/BrowseShops";
 import SellerEnquiries from "../screens/seller/SellerEnquiries";
+import ManageUsers from "../screens/admin/ManageUsers";
 
 const AppRouter = () => {
   return (
@@ -93,6 +95,8 @@ const AuthConsumer = () => {
 
         {/* admin routes */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/manage-users" element={<ManageUsers />} />
+        <Route path="/admin/manage-shops" element={<ManageShops />} />
       </Routes>
     </BrowserRouter>
   );
