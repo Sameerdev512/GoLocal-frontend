@@ -37,6 +37,9 @@ const AuthConsumer = () => {
   const role = localStorage.getItem("role")
   console.log(role);
 
+  //taking role from local storage
+  const role = localStorage.getItem("role");
+
   return (
     <BrowserRouter>
       <ToastContainer
